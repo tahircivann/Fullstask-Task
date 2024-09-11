@@ -38,7 +38,7 @@ const RegulatorySearchPage = () => {
           throw new Error('Failed to fetch data');
         }
         const data = await response.json();
-        setItems(data.items); // Assuming the API returns { items: [...] }
+        setItems(data.items); // { items: [...] }
         setLoading(false);
       } catch (error) {
         setError(error.message);
