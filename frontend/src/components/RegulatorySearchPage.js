@@ -27,7 +27,20 @@ const RegulatorySearchPage = () => {
   const [loading, setLoading] = useState(true); // State to manage loading state
   const [error, setError] = useState(null); // State to manage error state
   const [searchValue, setSearchValue] = useState(''); // State to store search input
-
+  const [selectedFilters, setSelectedFilters] = useState({}); // State to store selected filters
+  // Helper function to get decision name by ID
+  const getDecisionNameById = (decisionId) => {
+    switch (decisionId) {
+      case '1':
+        return 'Approved';
+      case '2':
+        return 'Adopted';
+      case '3':
+        return 'In Review';
+      default:
+        return '';
+    }
+  }
   // Fetch data from API when component mounts
   useEffect(() => {
     const fetchData = async () => {
@@ -49,12 +62,17 @@ const RegulatorySearchPage = () => {
     fetchData();
   }, []);
 
-  console.log(items);
+  // Filter items based on the search value and selected filters
+  const filteredItems = items.filter(item => {
+    const matchesSearch = item.title.toLowerCase().includes(searchValue.toLowerCase());
 
-  // Filter items based on the search value
-  const filteredItems = items.filter(item =>
-    item.title.toLowerCase().includes(searchValue.toLowerCase())
-  );
+    const matchesDecision = selectedFilters.decisionId 
+      ? item.decision.name === getDecisionNameById(selectedFilters.decisionId) 
+      : true;
+    
+    return matchesSearch && matchesDecision;
+  });
+
 
   // Show loading message
   if (loading) {
@@ -79,7 +97,7 @@ const RegulatorySearchPage = () => {
       <Title>AI-Powered Regulatory Search</Title>
       <Subtitle>Use the search engine to search for publications from courts and regulators.</Subtitle>
       <SearchRow searchValue={searchValue} onSearchChange={setSearchValue} /> {/* Pass searchValue and onSearchChange */}
-      <FiltersRow />
+      <FiltersRow selectedFilterValues={selectedFilters} onSelectionChange={setSelectedFilters} /> {/* Pass selectedFilterValues and onSelectionChange */}
       <PaginationHeader />
       <Results items={filteredItems} /> {/* Pass filtered items to Results */}
     </PageContainer>
