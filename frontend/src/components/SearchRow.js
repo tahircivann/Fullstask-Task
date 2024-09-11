@@ -50,6 +50,14 @@ const SearchRow = ({ searchValue, onSearchChange }) => {
     setNewSearchValue(searchValue);
   }, [searchValue]);
 
+  useEffect(() => {
+    if (newSearchValue === '') {
+      onSearchChange('');
+    }
+  }
+  , [newSearchValue, onSearchChange]);
+
+
   return (
     <SearchRowContainer>
       <InputContainer>
