@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+// Styled components
 const FiltersContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 32px;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 `;
 
 const RowContainer = styled.div`
   display: flex;
   gap: 16px;
   width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Input = styled.input`
@@ -31,31 +40,33 @@ const Select = styled.select`
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
+  color: #6F7170;
 `;
 
 const Button = styled.button`
   padding: 10px 20px;
   background-color: transparent;
-  color: #008347;;
+  color: #008347;
   border: none;
   cursor: pointer;
   font-size: 16px;
-  height: 20px;
-  weight: 500px;
-  size: 14px;
+  font-weight: 500;
   line-height: 20px;
+  display: flex;
   align-items: center;
+  gap: 10px;
+
   &:hover {
     text-decoration: underline;
-  };
-  gap : 10px;
+  }
 `;
+
 const FiltersRow = ({ onSelectionChange, selectedFilterValues: nullableFilterValues }) => {
   const selectedFilterValues = nullableFilterValues || {
-    categoryId: [],
-    decisionId: [],
-    companyId: [],
-    publishDate: null,
+    categoryId: '',
+    decisionId: '',
+    companyId: '',
+    publishDate: '',
   };
 
   const categories = [
@@ -81,13 +92,14 @@ const FiltersRow = ({ onSelectionChange, selectedFilterValues: nullableFilterVal
   const handleSearchChange = (newValues) => {
     const updatedValues = { ...localFilterValues, ...newValues };
     setLocalFilterValues(updatedValues);
-    onSelectionChange(updatedValues); // Pass the updated values to the parent component
+    onSelectionChange(updatedValues);
   };
 
   return (
     <FiltersContainer>
       <RowContainer>
         <Select
+          id="category-select"
           value={localFilterValues.categoryId || ''}
           onChange={(e) => handleSearchChange({ categoryId: e.target.value })}
         >
@@ -100,6 +112,7 @@ const FiltersRow = ({ onSelectionChange, selectedFilterValues: nullableFilterVal
         </Select>
 
         <Select
+          id="decision-select"
           value={localFilterValues.decisionId || ''}
           onChange={(e) => handleSearchChange({ decisionId: e.target.value })}
         >
@@ -112,6 +125,7 @@ const FiltersRow = ({ onSelectionChange, selectedFilterValues: nullableFilterVal
         </Select>
 
         <Select
+          id="company-select"
           value={localFilterValues.companyId || ''}
           onChange={(e) => handleSearchChange({ companyId: e.target.value })}
         >
@@ -126,6 +140,7 @@ const FiltersRow = ({ onSelectionChange, selectedFilterValues: nullableFilterVal
         <Input
           type="date"
           placeholder="Publish Date (e.g., Nov 18 2024)"
+          color='#6F7170'
           value={localFilterValues.publishDate || ''}
           onChange={(e) => handleSearchChange({ publishDate: e.target.value })}
         />
@@ -134,10 +149,10 @@ const FiltersRow = ({ onSelectionChange, selectedFilterValues: nullableFilterVal
       <Button
         onClick={() => {
           handleSearchChange({
-            categoryId: null,
-            decisionId: null,
-            companyId: null,
-            publishDate: null,
+            categoryId: '',
+            decisionId: '',
+            companyId: '',
+            publishDate: '',
           });
         }}
       >

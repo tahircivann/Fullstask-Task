@@ -1,48 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ResultItem = (props) => {
-  const { id, title, description, publish_date, category, company, decision } = props;
-  const formatDateToMMMDDYYYY = (dateStr) => {
-    const date = new Date(dateStr);
-    return new Intl.DateTimeFormat('en-EG', {
-      month: 'short',
-      day: '2-digit',
-      year: 'numeric'
-    }).format(date);
-  };
-  
-  return (
-    <Container>
-      <Header>
-        <PublishDate>{formatDateToMMMDDYYYY(publish_date)}</PublishDate>
-      </Header>
-      <TitleLink href={`/regulations/${id}`}>
-        {title}
-      </TitleLink>
-      <Description>{description}</Description>
-      <DetailsRow>
-        <DetailsColumn>
-          <Label>Category</Label>
-          <OptionTitle>{category.name}</OptionTitle>
-        </DetailsColumn>
-        <DetailsColumn>
-          <Label>Decision</Label>
-          <OptionTitle>{decision.name}</OptionTitle>
-        </DetailsColumn>
-        <DetailsColumn>
-          <Label>Company</Label>
-          <OptionTitle>{company.name}</OptionTitle>
-        </DetailsColumn>
-      </DetailsRow>
-    </Container>
-  );
-};
-
-export default ResultItem;
-
 // Styled components
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -59,7 +18,6 @@ const PublishDate = styled.p`
   font-size: 14px;
   color: #333;  
   font-weight: 600;
-  font-size: 14px;
   line-height: 20px;
 `;
 
@@ -83,6 +41,10 @@ const DetailsRow = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const DetailsColumn = styled.div`
@@ -103,3 +65,45 @@ const OptionTitle = styled.span`
   line-height: 20px;
   color: #333;
 `;
+
+const ResultItem = React.memo(({ id, title, description, publish_date, category, company, decision }) => {
+  // Memoized date formatting function
+  const formatDateToMMMDDYYYY = (dateStr) => {
+    const date = new Date(dateStr);
+    return new Intl.DateTimeFormat('en-EG', {
+      month: 'short',
+      day: '2-digit',
+      year: 'numeric'
+    }).format(date);
+  };
+
+  return (
+    <Container>
+      <Header>
+        <PublishDate>{formatDateToMMMDDYYYY(publish_date)}</PublishDate>
+      </Header>
+      <h2>
+        <TitleLink href={`/regulations/${id}`} aria-label={`View details about ${title}`}>
+          {title}
+        </TitleLink>
+      </h2>
+      <Description>{description}</Description>
+      <DetailsRow>
+        <DetailsColumn>
+          <Label>Category</Label>
+          <OptionTitle>{category?.name || 'Unknown'}</OptionTitle>
+        </DetailsColumn>
+        <DetailsColumn>
+          <Label>Decision</Label>
+          <OptionTitle>{decision?.name || 'Unknown'}</OptionTitle>
+        </DetailsColumn>
+        <DetailsColumn>
+          <Label>Company</Label>
+          <OptionTitle>{company?.name || 'Unknown'}</OptionTitle>
+        </DetailsColumn>
+      </DetailsRow>
+    </Container>
+  );
+});
+
+export default ResultItem;

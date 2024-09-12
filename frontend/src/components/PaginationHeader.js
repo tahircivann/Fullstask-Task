@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
-
 
 // Styled components
 const HeaderContainer = styled.div`
@@ -20,6 +19,11 @@ const ResultsContainer = styled.div`
 const ControlsContainer = styled.div`
   display: flex;
   gap: 16px;  // Adjust the gap between the select elements
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 8px;
+  }
 `;
 
 const Title = styled.h2`
@@ -34,14 +38,6 @@ const Subtitle = styled.p`
   margin: 0;
 `;
 
-const SelectContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid// Match the border color from the design
-  border-radius: 4px;
-  padding: 12px 16px;
-  gap: 4px;  // Add small spacing between label and select
-`;
 
 
 const Select = styled.select`
@@ -53,6 +49,7 @@ const Select = styled.select`
   background-color: #fff;
   color: #000;
 `;
+
 const PaginationHeader = (props) => {
   const {
     paginationOptions,
@@ -63,12 +60,13 @@ const PaginationHeader = (props) => {
     displayTotal,
   } = props;
 
-  const handlePaginationChange = (options) => {
+  // Memoize pagination change handler for performance
+  const handlePaginationChange = useCallback((options) => {
     onPaginationChange?.({
       ...paginationOptions,
       ...options,
     });
-  };
+  }, [onPaginationChange, paginationOptions]);
 
   const displayPageStart = (displayPage - 1) * displaySize;
 
@@ -77,12 +75,12 @@ const PaginationHeader = (props) => {
       <ResultsContainer>
         <Title>Results</Title>
         <Subtitle>
-          Showing {displayPageStart + displayItems ? 1 : 0}- {displayPageStart + displayItems} of {displayTotal} results
+          Showing {displayItems > 0 ? displayPageStart + 1 : 0} - {displayPageStart + displayItems} of {displayTotal} results
         </Subtitle>
       </ResultsContainer>
       <ControlsContainer>
-        <SelectContainer>
           <Select
+            id="select-results-per-page"
             value={paginationOptions.size}
             onChange={(e) => handlePaginationChange({ size: Number(e.target.value) })}
           >
@@ -90,23 +88,30 @@ const PaginationHeader = (props) => {
             <option value={10}>10</option>
             <option value={20}>20</option>
           </Select>
-        </SelectContainer>
-        <SelectContainer>
           <Select
             id="select-sort-by"
             value={paginationOptions.sortBy || ''}
             onChange={(e) => handlePaginationChange({ sortBy: e.target.value })}
           >
-            <option value="">Sort by</option>
+            <option value="_">Sort by</option>
             <option value="publish_date">Date: Earliest First</option>
             <option value="-publish_date">Date: Latest First</option>
             <option value="title">Title: A to Z</option>
             <option value="-title">Title: Z to A</option>
           </Select>
-        </SelectContainer>
       </ControlsContainer>
     </HeaderContainer>
   );
 };
 
-export default PaginationHeader;
+// Set default props to prevent errors
+PaginationHeader.defaultProps = {
+  paginationOptions: { size: 5, sortBy: '' },
+  onPaginationChange: () => {},
+  displayPage: 1,
+  displaySize: 5,
+  displayItems: 0,
+  displayTotal: 0,
+};
+
+export default React.memo(PaginationHeader);
