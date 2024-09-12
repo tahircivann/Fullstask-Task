@@ -27,12 +27,12 @@ const ResultItem = (props) => {
           <OptionTitle>{category.name}</OptionTitle>
         </DetailsColumn>
         <DetailsColumn>
-          <Label>Company</Label>
-          <OptionTitle>{company.name}</OptionTitle>
-        </DetailsColumn>
-        <DetailsColumn>
           <Label>Decision</Label>
           <OptionTitle>{decision.name}</OptionTitle>
+        </DetailsColumn>
+        <DetailsColumn>
+          <Label>Company</Label>
+          <OptionTitle>{company.name}</OptionTitle>
         </DetailsColumn>
       </DetailsRow>
     </Container>
@@ -75,8 +75,8 @@ const TitleLink = styled.a`
 `;
 
 const Description = styled.p`
-  font-size: 16px;
-  color: #333;
+  font-size: 14px;
+  color: #6F7170;
 `;
 
 const DetailsRow = styled.div`

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
-import RegulatorySearchPage from './components/RegulatorySearchPage';
+import SearchPage from './pages/SearchPage';
 import Footer from './components/Footer';
 
 const Container = styled.div`
@@ -45,7 +45,7 @@ function App() {
         <MainContentWrapper>
           <Header />
           <MainContent>
-            <RegulatorySearchPage />
+            <SearchPage />
           </MainContent>
         </MainContentWrapper>
       </ContentArea>

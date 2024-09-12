@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
-
 const FooterContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.footerBackground};
   padding: 40px 64px 40px 170px;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const FooterSection = styled.div`
@@ -16,6 +18,11 @@ const FooterSection = styled.div`
   justify-content: stretch;
   margin-bottom: 24px;
   gap: 64px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 32px;
+  }
 `;
 
 const Column = styled.div`
@@ -58,16 +65,16 @@ const FooterBottom = styled.div`
 
 const Divider = styled.hr`
   border: 0;
-  border-top: 1px solid ;
+  border-top: 1px solid;
   margin: 22px 0;
-  color:#E4E5E7
+  color: #E4E5E7;
 `;
 
 const Footer = () => (
   <FooterContainer>
     <FooterSection>
       <Column flexGrow alignStart spacing={2}>
-        <Logo src="icons/logo-with-text.svg" alt="logo" />
+        <Logo src="icons/logo-with-text.svg" alt="CourtCorrect logo" />
         <FooterText>Justice for all.</FooterText>
         <FooterText>
           hello@courtcorrect.com <br />
@@ -76,7 +83,7 @@ const Footer = () => (
         </FooterText>
       </Column>
       <Column spacing={2}>
-        <FooterTitle>Quick Links</FooterTitle>
+      <FooterTitle>Quick Links</FooterTitle>
         <FooterText>Home</FooterText>
         <FooterText>Data</FooterText>
         <FooterText>Cases</FooterText>
@@ -98,12 +105,24 @@ const Footer = () => (
     <FooterBottom>
       <FooterText>© 2023 CourtCorrect LTD</FooterText>
       <SocialIcons>
-        <img src="icons/icons8-facebook.svg" alt="facebook" />
-        <img src="icons/icons8-twitter.svg" alt="twitter" />
-        <img src="icons/icons8-instagram.svg" alt="instagram" />
-        <img src="icons/icons8-youtube.svg" alt="youtube" />
-        <img src="icons/icons8-linkedin.svg" alt="linkedin" />
-        <img src="icons/icons8-tiktok.svg" alt="tiktok" />
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+          <img src="icons/icons8-facebook.svg" alt="Visit our Facebook page" loading="lazy" />
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+          <img src="icons/icons8-twitter.svg" alt="Visit our Twitter page" loading="lazy" />
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+          <img src="icons/icons8-instagram.svg" alt="Visit our Instagram page" loading="lazy" />
+        </a>
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+          <img src="icons/icons8-youtube.svg" alt="Visit our YouTube page" loading="lazy" />
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          <img src="icons/icons8-linkedin.svg" alt="Visit our LinkedIn page" loading="lazy" />
+        </a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
+          <img src="icons/icons8-tiktok.svg" alt="Visit our TikTok page" loading="lazy" />
+        </a>
       </SocialIcons>
     </FooterBottom>
   </FooterContainer>
