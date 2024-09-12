@@ -3,11 +3,19 @@ import styled from 'styled-components';
 
 const ResultItem = (props) => {
   const { id, title, description, publish_date, category, company, decision } = props;
+  const formatDateToMMMDDYYYY = (dateStr) => {
+    const date = new Date(dateStr);
+    return new Intl.DateTimeFormat('en-EG', {
+      month: 'short',
+      day: '2-digit',
+      year: 'numeric'
+    }).format(date);
+  };
   
   return (
     <Container>
       <Header>
-        <PublishDate>{publish_date}</PublishDate>
+        <PublishDate>{formatDateToMMMDDYYYY(publish_date)}</PublishDate>
       </Header>
       <TitleLink href={`/regulations/${id}`}>
         {title}

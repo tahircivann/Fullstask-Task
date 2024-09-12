@@ -125,6 +125,7 @@ const FiltersRow = ({ onSelectionChange, selectedFilterValues: nullableFilterVal
 
         <Input
           type="date"
+          placeholder="Publish Date (e.g., Nov 18 2024)"
           value={localFilterValues.publishDate || ''}
           onChange={(e) => handleSearchChange({ publishDate: e.target.value })}
         />

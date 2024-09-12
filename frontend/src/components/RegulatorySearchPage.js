@@ -93,7 +93,7 @@ const RegulatorySearchPage = () => {
     fetchData();
   }, []);
 
-  // Filter items based on the search value and selected filters
+  // Filter items based on the search value, selected filters, and publish date
   const filteredItems = items.filter(item => {
     const matchesSearch = item.title.toLowerCase().includes(searchValue.toLowerCase());
 
@@ -108,8 +108,12 @@ const RegulatorySearchPage = () => {
     const matchesCompany = selectedFilters.companyId
       ? item.company.name === getCompanyNameById(selectedFilters.companyId)
       : true;
-    
-    return matchesSearch && matchesDecision && matchesCategory && matchesCompany;
+
+      const matchesPublishDate = selectedFilters.publishDate
+      ? new Date(item.publish_date).toISOString().split('T')[0] === new Date(selectedFilters.publishDate).toISOString().split('T')[0]
+      : true;
+
+    return matchesSearch && matchesDecision && matchesCategory && matchesCompany && matchesPublishDate;
   });
 
   // Sort items based on selected sort option
