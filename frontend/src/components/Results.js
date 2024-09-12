@@ -2,29 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ResultItem from './ResultItem.js';
 
-const Results = (props) => {
-  const { items } = props;
-
-  
-  
-  return (
-    <ResultsContainer>
-      {items?.length ? items.map((item, index) => (
-        <ResultItemContainer key={index}>
-          <ResultItemWrapper marginTop={index ? 5 : 0}>
-            <ResultItem {...item} />
-          </ResultItemWrapper>
-          <StyledDivider />
-        </ResultItemContainer>
-      )) : <NothingToShowText>Nothing to show</NothingToShowText>}
-    </ResultsContainer>
-  );
-};
-
-export default Results;
-
 // Styled components
-
 const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -36,8 +14,11 @@ const ResultItemContainer = styled.div`
 `;
 
 const ResultItemWrapper = styled.div`
-  margin-top: ${({ marginTop }) => `${marginTop * 8}px`};
   margin-bottom: 40px;
+
+  &:not(:first-child) {
+    margin-top: 40px;
+  }
 `;
 
 const StyledDivider = styled.hr`
@@ -53,3 +34,25 @@ const NothingToShowText = styled.p`
   font-size: 16px;
   color: #333;
 `;
+
+// Component with default empty array for items and optimized rendering
+const Results = ({ items = [] }) => {
+  return (
+    <ResultsContainer>
+      {items.length ? (
+        items.map((item) => (
+          <ResultItemContainer key={item.id || item.uniqueId}>
+            <ResultItemWrapper>
+              <ResultItem {...item} />
+            </ResultItemWrapper>
+            <StyledDivider />
+          </ResultItemContainer>
+        ))
+      ) : (
+        <NothingToShowText>No results found. Try adjusting your search or filters.</NothingToShowText>
+      )}
+    </ResultsContainer>
+  );
+};
+
+export default Results;

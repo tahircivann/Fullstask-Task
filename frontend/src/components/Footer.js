@@ -73,7 +73,7 @@ const Divider = styled.hr`
 const Footer = () => (
   <FooterContainer>
     <FooterSection>
-      <Column flexGrow alignStart spacing={2}>
+      <Column spacing={2}>
         <Logo src="icons/logo-with-text.svg" alt="CourtCorrect logo" />
         <FooterText>Justice for all.</FooterText>
         <FooterText>

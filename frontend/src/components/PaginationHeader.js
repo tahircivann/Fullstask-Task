@@ -104,14 +104,4 @@ const PaginationHeader = (props) => {
   );
 };
 
-// Set default props to prevent errors
-PaginationHeader.defaultProps = {
-  paginationOptions: { size: 5, sortBy: '' },
-  onPaginationChange: () => {},
-  displayPage: 1,
-  displaySize: 5,
-  displayItems: 0,
-  displayTotal: 0,
-};
-
 export default React.memo(PaginationHeader);

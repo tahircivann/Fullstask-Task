@@ -61,32 +61,32 @@ const Sidebar = ({ activePage }) => {
           </StyledIconButton>
         </LogoContainer>
 
-        <StyledIconButton active={activePage === 'home'} aria-label="Home">
+        <StyledIconButton  aria-label="Home">
             <LuHome size="24px" />
         </StyledIconButton>
 
-        <StyledIconButton active={activePage === 'services'} aria-label="Services">
+        <StyledIconButton  aria-label="Services">
             <MdOutlineHomeRepairService size="24px" />
         </StyledIconButton>
 
-        <StyledIconButton active={activePage === 'contacts'} aria-label="Contacts">
+        <StyledIconButton aria-label="Contacts">
             <RiContactsBookLine size="24px" />
         </StyledIconButton>
 
-        <StyledIconButton active={activePage === 'documents'} aria-label="Documents">
+        <StyledIconButton  aria-label="Documents">
             <IoDocumentTextOutline size="24px" />
         </StyledIconButton>
 
-        <StyledIconButton active={activePage === 'search'} aria-label="Search">
+        <StyledIconButton  aria-label="Search">
             <FiSearch size="24px" />
         </StyledIconButton>
 
-        <StyledIconButton active={activePage === 'settings'} aria-label="Settings">
+        <StyledIconButton  aria-label="Settings">
 
             <IoSettingsOutline size="24px" />
         </StyledIconButton>
 
-        <StyledIconButton active={activePage === 'help'} aria-label="Help">
+        <StyledIconButton  aria-label="Help">
             <AiOutlineQuestionCircle size="24px" />
         </StyledIconButton>
       </IconContainer>
