@@ -50,12 +50,11 @@ const Button = styled.button`
   };
   gap : 10px;
 `;
-
 const FiltersRow = ({ onSelectionChange, selectedFilterValues: nullableFilterValues }) => {
   const selectedFilterValues = nullableFilterValues || {
-    categoryId: null,
-    decisionId: null,
-    companyId: null,
+    categoryId: [],
+    decisionId: [],
+    companyId: [],
     publishDate: null,
   };
 
@@ -66,9 +65,9 @@ const FiltersRow = ({ onSelectionChange, selectedFilterValues: nullableFilterVal
   ];
 
   const decisions = [
-    { id: 1, name: 'Upheld' },
-    { id: 2, name: 'Rejected' },
-    { id: 3, name: 'Pending' },
+    { id: 1, name: 'Approved' },
+    { id: 2, name: 'Adopted' },
+    { id: 3, name: 'In Review' },
   ];
 
   const companies = [
@@ -79,11 +78,10 @@ const FiltersRow = ({ onSelectionChange, selectedFilterValues: nullableFilterVal
 
   const [localFilterValues, setLocalFilterValues] = useState(selectedFilterValues);
 
-
   const handleSearchChange = (newValues) => {
     const updatedValues = { ...localFilterValues, ...newValues };
     setLocalFilterValues(updatedValues);
-    onSelectionChange(updatedValues);
+    onSelectionChange(updatedValues); // Pass the updated values to the parent component
   };
 
   return (

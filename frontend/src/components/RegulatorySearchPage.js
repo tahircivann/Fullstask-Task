@@ -41,6 +41,32 @@ const RegulatorySearchPage = () => {
         return '';
     }
   }
+
+  const getCategoryNameById = (categoryId) => {
+    switch (categoryId) {
+      case '1':
+        return 'Banking';
+      case '2':
+        return 'Insurance';
+      case '3':
+        return 'Finance';
+      default:
+        return '';
+    }
+  }
+
+  const getCompanyNameById = (companyId) => {
+    switch (companyId) {
+      case '1':
+        return 'Barclays';
+      case '2':
+        return 'HSBC';
+      case '3':
+        return 'Lloyds';
+      default:
+        return '';
+    }
+  }
   // Fetch data from API when component mounts
   useEffect(() => {
     const fetchData = async () => {
@@ -69,8 +95,16 @@ const RegulatorySearchPage = () => {
     const matchesDecision = selectedFilters.decisionId 
       ? item.decision.name === getDecisionNameById(selectedFilters.decisionId) 
       : true;
+
+    const matchesCategory = selectedFilters.categoryId
+      ? item.category.name === getCategoryNameById(selectedFilters.categoryId)
+      : true;
+
+    const matchesCompany = selectedFilters.companyId
+      ? item.company.name === getCompanyNameById(selectedFilters.companyId)
+      : true;
     
-    return matchesSearch && matchesDecision;
+    return matchesSearch && matchesDecision && matchesCategory && matchesCompany;
   });
 
 
