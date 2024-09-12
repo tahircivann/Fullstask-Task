@@ -30,6 +30,8 @@ const RegulatorySearchPage = () => {
   const [selectedFilters, setSelectedFilters] = useState({}); // State to store selected filters
   const [resultsPerPage, setResultsPerPage] = useState(5); // State to store the number of results per page
   const [currentPage, setCurrentPage] = useState(1); // State to store current page
+  const [sortBy, setSortBy] = useState(''); // State to store sort option
+
   // Helper function to get decision name by ID
   const getDecisionNameById = (decisionId) => {
     switch (decisionId) {
@@ -69,6 +71,7 @@ const RegulatorySearchPage = () => {
         return '';
     }
   }
+
   // Fetch data from API when component mounts
   useEffect(() => {
     const fetchData = async () => {
@@ -109,15 +112,38 @@ const RegulatorySearchPage = () => {
     return matchesSearch && matchesDecision && matchesCategory && matchesCompany;
   });
 
+  // Sort items based on selected sort option
+  const sortItems = (items, sortBy) => {
+    const sortedItems = [...items]; // Make a copy of the items to avoid mutating the original array
+    
+    switch (sortBy) {
+      case 'publish_date':
+        return sortedItems.sort((a, b) => new Date(a.publish_date) - new Date(b.publish_date));
+      case '-publish_date':
+        return sortedItems.sort((a, b) => new Date(b.publish_date) - new Date(a.publish_date));
+      case 'title':
+        return sortedItems.sort((a, b) => a.title.localeCompare(b.title));
+      case '-title':
+        return sortedItems.sort((a, b) => b.title.localeCompare(a.title));
+      default:
+        return items;
+    }
+  };
+
   // Calculate pagination
   const startIndex = (currentPage - 1) * resultsPerPage;
-  const paginatedItems = filteredItems.slice(startIndex, startIndex + resultsPerPage);
+  const sortedItems = sortItems(filteredItems, sortBy); // Sort items before pagination
+  const paginatedItems = sortedItems.slice(startIndex, startIndex + resultsPerPage);
 
-  // Handle pagination change
+  // Handle pagination and sorting change
   const handlePaginationChange = (paginationOptions) => {
     if (paginationOptions.size) {
       setResultsPerPage(paginationOptions.size);
       setCurrentPage(1); // Reset to first page when page size changes
+    }
+    
+    if (paginationOptions.sortBy) {
+      setSortBy(paginationOptions.sortBy); // Update the sortBy state when sort option changes
     }
   };
 
@@ -146,7 +172,7 @@ const RegulatorySearchPage = () => {
       <SearchRow searchValue={searchValue} onSearchChange={setSearchValue} /> {/* Pass searchValue and onSearchChange */}
       <FiltersRow selectedFilterValues={selectedFilters} onSelectionChange={setSelectedFilters} /> {/* Pass selectedFilterValues and onSelectionChange */}
       <PaginationHeader
-        paginationOptions={{ size: resultsPerPage }}
+        paginationOptions={{ size: resultsPerPage, sortBy }} // Pass sortBy to the PaginationHeader
         onPaginationChange={handlePaginationChange}
         displayPage={currentPage}
         displaySize={resultsPerPage}
