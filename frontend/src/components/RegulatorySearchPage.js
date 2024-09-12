@@ -28,6 +28,8 @@ const RegulatorySearchPage = () => {
   const [error, setError] = useState(null); // State to manage error state
   const [searchValue, setSearchValue] = useState(''); // State to store search input
   const [selectedFilters, setSelectedFilters] = useState({}); // State to store selected filters
+  const [resultsPerPage, setResultsPerPage] = useState(5); // State to store the number of results per page
+  const [currentPage, setCurrentPage] = useState(1); // State to store current page
   // Helper function to get decision name by ID
   const getDecisionNameById = (decisionId) => {
     switch (decisionId) {
@@ -107,6 +109,17 @@ const RegulatorySearchPage = () => {
     return matchesSearch && matchesDecision && matchesCategory && matchesCompany;
   });
 
+  // Calculate pagination
+  const startIndex = (currentPage - 1) * resultsPerPage;
+  const paginatedItems = filteredItems.slice(startIndex, startIndex + resultsPerPage);
+
+  // Handle pagination change
+  const handlePaginationChange = (paginationOptions) => {
+    if (paginationOptions.size) {
+      setResultsPerPage(paginationOptions.size);
+      setCurrentPage(1); // Reset to first page when page size changes
+    }
+  };
 
   // Show loading message
   if (loading) {
@@ -132,8 +145,15 @@ const RegulatorySearchPage = () => {
       <Subtitle>Use the search engine to search for publications from courts and regulators.</Subtitle>
       <SearchRow searchValue={searchValue} onSearchChange={setSearchValue} /> {/* Pass searchValue and onSearchChange */}
       <FiltersRow selectedFilterValues={selectedFilters} onSelectionChange={setSelectedFilters} /> {/* Pass selectedFilterValues and onSelectionChange */}
-      <PaginationHeader />
-      <Results items={filteredItems} /> {/* Pass filtered items to Results */}
+      <PaginationHeader
+        paginationOptions={{ size: resultsPerPage }}
+        onPaginationChange={handlePaginationChange}
+        displayPage={currentPage}
+        displaySize={resultsPerPage}
+        displayItems={paginatedItems.length}
+        displayTotal={filteredItems.length}
+      />
+      <Results items={paginatedItems} /> {/* Pass paginated items to Results */}
     </PageContainer>
   );
 };

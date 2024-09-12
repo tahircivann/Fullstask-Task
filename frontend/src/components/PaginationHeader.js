@@ -53,21 +53,15 @@ const Select = styled.select`
   background-color: #fff;
   color: #000;
 `;
-
 const PaginationHeader = (props) => {
   const {
-    paginationOptions: nullablePaginationOptions,
+    paginationOptions,
     onPaginationChange,
     displayPage,
     displaySize,
     displayItems,
     displayTotal,
   } = props;
-
-  const paginationOptions = nullablePaginationOptions || {
-    size: 5,
-    sortBy: '-publish_date',
-  };
 
   const handlePaginationChange = (options) => {
     onPaginationChange?.({
@@ -83,8 +77,7 @@ const PaginationHeader = (props) => {
       <ResultsContainer>
         <Title>Results</Title>
         <Subtitle>
-          Showing {displayPageStart + displayItems ? 1 : 0}-
-          {displayPageStart + displayItems} of {displayTotal} results
+          Showing {displayPageStart + displayItems ? 1 : 0}- {displayPageStart + displayItems} of {displayTotal} results
         </Subtitle>
       </ResultsContainer>
       <ControlsContainer>
@@ -104,6 +97,7 @@ const PaginationHeader = (props) => {
             value={paginationOptions.sortBy || ''}
             onChange={(e) => handlePaginationChange({ sortBy: e.target.value })}
           >
+            <option value="">Sort by</option>
             <option value="publish_date">Date: Earliest First</option>
             <option value="-publish_date">Date: Latest First</option>
             <option value="title">Title: A to Z</option>
@@ -116,4 +110,3 @@ const PaginationHeader = (props) => {
 };
 
 export default PaginationHeader;
-
