@@ -11,6 +11,12 @@ https://github.com/user-attachments/assets/357f3d9a-8ddd-420a-9dff-423375acbf11
 
 https://www.youtube.com/watch?v=6PpL1ArEp-U
 
+
+Run tests:
+   ```bash
+   npm test
+   ```
+
 This project is a simple full-stack web application structured with a frontend built in React and a backend using FastAPI.
 Your goal is to implement a single-page search engine as shown in the Figma design.
 
