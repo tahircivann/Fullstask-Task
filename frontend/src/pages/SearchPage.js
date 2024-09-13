@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDebounce } from '../hooks/useDebounce';
 import { useSearch } from '../hooks/useSearch';
-import Results from '../components/Results';
-import SearchRow from '../components/SearchRow';
-import FiltersRow from '../components/FiltersRow';
-import PaginationHeader from '../components/PaginationHeader';
+import Results from '../components/Results/Results';
+import SearchRow from '../components/Search/SearchRow';
+import FiltersRow from '../components/Filters/FiltersRow';
+import PaginationHeader from '../components/PaginationHeader/PaginationHeader';
+import Pagination from '../components/PaginationHeader/Pagination';  // Import your custom Pagination component
 
 const PageContainer = styled.div`
   padding: 40px;
@@ -23,8 +24,6 @@ const Subtitle = styled.p`
   color: #666;
   margin-bottom: 40px;
 `;
-
-
 
 const SearchPage = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -46,6 +45,10 @@ const SearchPage = () => {
     }
   };
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
   if (loading) return <PageContainer>Loading...</PageContainer>;
   if (error) return <PageContainer>Error: {error}</PageContainer>;
 
@@ -64,7 +67,11 @@ const SearchPage = () => {
         displayTotal={totalItems}
       />
       <Results items={items} />
-
+      <Pagination
+        count={Math.ceil(totalItems / resultsPerPage)}
+        page={currentPage}
+        onChange={handlePageChange}
+      />
     </PageContainer>
   );
 };

@@ -1,9 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
 
-// Styled components for Box, Typography, and Avatar
-
-const HeaderWrapper = styled.div`
+/** Wrapper for the header */
+export const HeaderWrapper = styled.header`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -11,15 +9,21 @@ const HeaderWrapper = styled.div`
   padding: 16px;
   padding-right: 64px;
   background-color: #FFFFFF;
+
+  @media (max-width: 768px) {
+    padding-right: 16px;
+  }
 `;
 
-const NameText = styled.p`
+/** Text displaying the user's name */
+export const NameText = styled.p`
   font-size: 16px;
   color: #333;
   margin: 0;
 `;
 
-const Avatar = styled.div`
+/** Styled avatar */
+export const Avatar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,14 +36,3 @@ const Avatar = styled.div`
   font-size: 18px;
   font-weight: bold;
 `;
-
-function Header() {
-    return (
-        <HeaderWrapper>
-            <NameText>Name Surname</NameText>
-            <Avatar>CC</Avatar>
-        </HeaderWrapper>
-    );
-}
-
-export default Header;

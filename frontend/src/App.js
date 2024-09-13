@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
+import Header from './components/Header/Header';
+import Sidebar from './components/Sidebar/Sidebar';
 import SearchPage from './pages/SearchPage';
-import Footer from './components/Footer';
+import Footer from './components/Footer/Footer';
 
 const Container = styled.div`
   display: flex;
