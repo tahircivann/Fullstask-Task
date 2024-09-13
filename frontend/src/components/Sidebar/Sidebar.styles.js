@@ -5,7 +5,7 @@ export const SidebarContainer = styled.nav`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  background: ${({ theme }) => theme.palette.background.default || '#ffffff'};
+  background: ${({ theme }) => theme.colors.background};
   border-right: 1px solid ${({ theme }) => theme.palette.action.disabledBackground || '#e0e0e0'};
   width: 80px;
 

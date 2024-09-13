@@ -33,7 +33,9 @@ export const useSearch = (searchValue, selectedFilters, sortBy, currentPage, res
     switch (decisionId) {
       case '1': return 'Approved';
       case '2': return 'Adopted';
-      case '3': return 'In Review';
+      case '3': return 'In Progress';
+      case '4': return 'In Review';
+      case '5': return 'Implemented';
       default: return '';
     }
   };

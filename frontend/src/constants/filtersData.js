@@ -7,7 +7,9 @@ export const categories = [
   export const decisions = [
     { id: '1', name: 'Approved' },
     { id: '2', name: 'Adopted' },
-    { id: '3', name: 'In Review' },
+    { id: '3', name: 'In Progress' },
+    { id: '4', name: 'In Review' },
+    { id: '5', name: 'Implemented' },
   ];
   
   export const companies = [

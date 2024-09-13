@@ -15,15 +15,18 @@ export const colors = {
   borderSubduedLight: '#E4E5E7',
   footerDivider: '#BDE9D2',
   searchInputBackground: '#F7FCFA',
+  background: {
+    default: '#ffffff',
+  },
 };
 
 export const theme = {
   palette: {
     background: {
-      default: '#FFFFFF',
+      default: '#ffffff',
     },
     action: {
-      disabledBackground: '#E4F6ED',
+      disabledBackground: '#e0e0e0',
     },
     success: {
       main: '#26C281',
@@ -48,6 +51,9 @@ export const theme = {
     textSuccess: '#008347',
     footerBackground: '#F7FCFA',
     borderSubduedLight: '#E4E5E7',
+    background: {
+      default: '#ffffff',
+    },
   },
   typography: {
     fontFamily: 'Inter',

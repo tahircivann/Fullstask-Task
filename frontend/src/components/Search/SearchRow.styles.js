@@ -1,50 +1,72 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {
-  SearchRowContainer,
-  InputContainer,
-  SearchInput,
-  SearchButton,
-  HiddenLabel,
-} from './SearchRow.styles';
+import styled from 'styled-components';
 
-const SearchRow = ({ searchValue, onSearchChange }) => {
-  const handleInputChange = (event) => {
-    onSearchChange(event.target.value);
-  };
+/** Container for the entire search row */
+export const SearchRowContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 64px;
+  gap: 16px;
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      onSearchChange(searchValue);
-    }
-  };
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 32px;
+  }
+`;
 
-  return (
-    <SearchRowContainer>
-      <InputContainer>
-        <HiddenLabel htmlFor="search-input">Search</HiddenLabel>
-        <SearchInput
-          id="search-input"
-          type="text"
-          placeholder="Search..."
-          value={searchValue}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-        />
-      </InputContainer>
-      <SearchButton
-        onClick={() => onSearchChange(searchValue)}
-        disabled={!searchValue}
-      >
-        Search
-      </SearchButton>
-    </SearchRowContainer>
-  );
-};
+/** Container for the input field */
+export const InputContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+`;
 
-SearchRow.propTypes = {
-  searchValue: PropTypes.string.isRequired,
-  onSearchChange: PropTypes.func.isRequired,
-};
+/** Styled search input field */
+export const SearchInput = styled.input`
+  width: 100%;
+  padding: 10px 10px 10px 40px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
 
-export default SearchRow;
+  background: url('/assets/icons/search-icon.svg') no-repeat 10px center;
+  background-size: 20px;
+
+  &:focus {
+    border-color: #26c281;
+  }
+`;
+
+/** Styled search button */
+export const SearchButton = styled.button`
+  width: 193px;
+  padding: 10px;
+  background-color: #26c281;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #1e9f65;
+  }
+
+  &:disabled {
+    background-color: #1e9f65;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+/** Hidden label for accessibility */
+export const HiddenLabel = styled.label`
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+`;

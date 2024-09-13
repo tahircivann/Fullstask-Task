@@ -23,23 +23,23 @@ const Sidebar = ({ activePage }) => {
           </StyledIconButton>
         </LogoContainer>
 
-        <StyledIconButton aria-label="Home" active={activePage === 'home'}>
+        <StyledIconButton aria-label="Home">
           <LuHome size="24px" />
         </StyledIconButton>
 
-        <StyledIconButton aria-label="Services" active={activePage === 'services'}>
+        <StyledIconButton aria-label="Services">
           <MdOutlineHomeRepairService size="24px" />
         </StyledIconButton>
 
-        <StyledIconButton aria-label="Contacts" active={activePage === 'contacts'}>
+        <StyledIconButton aria-label="Contacts" >
           <RiContactsBookLine size="24px" />
         </StyledIconButton>
 
-        <StyledIconButton aria-label="Documents" active={activePage === 'documents'}>
+        <StyledIconButton aria-label="Documents" >
           <IoDocumentTextOutline size="24px" />
         </StyledIconButton>
 
-        <StyledIconButton aria-label="Search" active={activePage === 'search'}>
+        <StyledIconButton aria-label="Search" >
           <FiSearch size="24px" />
         </StyledIconButton>
 
