@@ -1,5 +1,7 @@
 # Project Overview
 
+https://www.youtube.com/watch?v=6PpL1ArEp-U
+
 This project is a simple full-stack web application structured with a frontend built in React and a backend using FastAPI.
 Your goal is to implement a single-page search engine as shown in the Figma design.
 
