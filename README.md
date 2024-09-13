@@ -1,5 +1,9 @@
 # Project Overview
 
+
+https://github.com/user-attachments/assets/52a26644-649c-4ae0-8310-9571a04ae007
+
+
 https://www.youtube.com/watch?v=6PpL1ArEp-U
 
 This project is a simple full-stack web application structured with a frontend built in React and a backend using FastAPI.
