@@ -78,7 +78,7 @@ export const PaginationButton = styled.button`
 
   &:disabled {
     cursor: not-allowed;
-    background-color: #ddd;
+    background-color: #fff;
     color: #888;
   }
 `;
