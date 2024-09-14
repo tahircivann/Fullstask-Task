@@ -13,7 +13,6 @@ import {
 
 const ResultItem = React.memo(
   ({ id, title, description, publish_date, category, company, decision }) => {
-    // Memoized date formatting function
     const formatDateToMMMDDYYYY = (dateStr) => {
       const date = new Date(dateStr);
       return new Intl.DateTimeFormat('en-EG', {

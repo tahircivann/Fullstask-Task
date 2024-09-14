@@ -6,7 +6,7 @@ import Results from '../components/Results/Results';
 import SearchRow from '../components/Search/SearchRow';
 import FiltersRow from '../components/Filters/FiltersRow';
 import PaginationHeader from '../components/PaginationHeader/PaginationHeader';
-import Pagination from '../components/PaginationHeader/Pagination';  // Import your custom Pagination component
+import Pagination from '../components/PaginationHeader/Pagination';  
 
 const PageContainer = styled.div`
   padding: 40px;
@@ -50,8 +50,7 @@ const SearchPage = () => {
   };
 
   if (loading) return <PageContainer>Loading...</PageContainer>;
-  if (error) return <PageContainer>Error: {error}</PageContainer>;
-
+  if (error) return <PageContainer>Error: {error + ' : Try to run backend code with "python main.py" '}</PageContainer>;
   return (
     <PageContainer>
       <Title>AI-Powered Regulatory Search</Title>
